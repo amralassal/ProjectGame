@@ -28,6 +28,8 @@ var Hero = cc.Layer.extend({
 		this.init()
 		
 		this.hpLabel = cc.LabelTTF.create(this.hp + '', "Arial", 28);
+		var tintRed = cc.TintBy.create(0, 0, -255, -255);
+		this.hpLabel.runAction(tintRed);
         this.hpLabel.setPosition(cc.p(point.x,point.y + 20 +heroTexture.height/2));
 		this.addChild(this.hpLabel);
     },
@@ -38,6 +40,9 @@ var Hero = cc.Layer.extend({
 		this.oldHp = this.hp
 		this.hp-= dmg;
 		this.newHp = this.hp
+		if(this.newHp < 1){
+			this.newHp = 0; // so that hp doesn't count negatively
+		}
 		this.schedule(this._updateHp, 1 / (this.oldHp-this.newHp) )
 	},
 	_newHp:0,
@@ -50,6 +55,10 @@ var Hero = cc.Layer.extend({
 		}else{
 			console.log('Exit')
 			this.unschedule(this._updateHp)
+			if(this.newHp == 0){ 
+				this.die() //trigger dying effect
+				
+			}
 			return;
 		}
 		/*
