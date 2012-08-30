@@ -56,7 +56,7 @@ cc.generateTextureCacheForColor = function (texture) {
 
     var pixels = ctx.getImageData(0, 0, w, h).data;
 
-    for (var rgbI = 0; rgbI < 4; rgbI++) {
+    for (var rgbI = 0; rgbI < 3; rgbI++) {
         var cacheCanvas = document.createElement("canvas");
         cacheCanvas.width = w;
         cacheCanvas.height = h;
@@ -116,7 +116,7 @@ cc.generateTintImage2 = function (texture, color, rect) {
  * @param {cc.Rect} rect
  * @return {HTMLCanvasElement}
  */
-cc.generateTintImage = function (texture, tintedImgCache, color, rect) {
+cc.generateTintImage = function (texture, tintedImgCache, color, rect, renderCanvas) {
     if (!rect) {
         rect = cc.rect(0, 0, texture.width, texture.height);
     }
@@ -126,13 +126,10 @@ cc.generateTintImage = function (texture, tintedImgCache, color, rect) {
     } else {
         selColor = color;
     }
-    var buff = document.createElement("canvas");
+    var buff = renderCanvas || document.createElement("canvas");
     buff.width = rect.size.width;
     buff.height = rect.size.height;
     var ctx = buff.getContext("2d");
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = 'copy';
-    ctx.drawImage(tintedImgCache[3], rect.origin.x, rect.origin.y, rect.size.width, rect.size.height, 0, 0, rect.size.width, rect.size.height);
 
     ctx.globalCompositeOperation = 'lighter';
     if (selColor.r > 0) {
@@ -248,7 +245,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     _blendFunc: {src:cc.BLEND_SRC, dst:cc.BLEND_DST},
     _texture:null,
     _originalTexture:null,
-    _color:cc.WHITE,
+    _color:cc.white(),
     //
     // Shared data
     //
@@ -434,8 +431,8 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 
         this._opacityModifyRGB = true;
         this._opacity = 255;
-        this._color = cc.WHITE;
-        this._colorUnmodified = cc.WHITE;
+        this._color = cc.white();
+        this._colorUnmodified = cc.white();
 
         this._blendFunc.src = cc.BLEND_SRC;
         this._blendFunc.dst = cc.BLEND_DST;
@@ -491,8 +488,8 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
         this.setDirty(false);
         this._opacityModifyRGB = true;
         this._opacity = 255;
-        this._color = cc.WHITE;
-        this._colorUnmodified = cc.WHITE;
+        this._color = cc.white();
+        this._colorUnmodified = cc.white();
 
         this._blendFunc.src = cc.BLEND_SRC;
         this._blendFunc.dst = cc.BLEND_DST;
@@ -1417,8 +1414,12 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
                 var cacheTextureForColor = cc.TextureCache.getInstance().getTextureColors(this._originalTexture);
                 if (cacheTextureForColor) {
                     //generate color texture cache
-                    var colorTexture = cc.generateTintImage(this.getTexture(), cacheTextureForColor, this._color, this.getTextureRect());
-                    this.setTexture(colorTexture);
+                    if(this._texture instanceof HTMLCanvasElement){
+                        cc.generateTintImage(this.getTexture(), cacheTextureForColor, this._color, this.getTextureRect(),this._texture);
+                    } else {
+                        var colorTexture = cc.generateTintImage(this.getTexture(), cacheTextureForColor, this._color, this.getTextureRect());
+                        this.setTexture(colorTexture);
+                    }
                 }
             }
         }

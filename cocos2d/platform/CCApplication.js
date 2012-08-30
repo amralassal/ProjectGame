@@ -162,7 +162,7 @@ cc.setup = function (el, width, height) {
             cc.log("Warning: target element is not a DIV or CANVAS");
         }
         cc.canvas = cc.$new("CANVAS");
-        cc.canvas.addClass = "gameCanvas";
+        cc.canvas.addClass("gameCanvas");
         cc.canvas.setAttribute("width", width || 480);
         cc.canvas.setAttribute("height", height || 320);
         cc.container = element;
@@ -235,7 +235,7 @@ cc.Application = cc.Class.extend(/** @lends cc.Application# */{
             return 0;
         }
         // TODO, need to be fixed.
-        if (window.requestAnimFrame) {
+        if (window.requestAnimFrame && this._animationInterval == 1/60) {
             var callback = function () {
                 cc.Director.getInstance().mainLoop();
                 window.requestAnimFrame(callback);

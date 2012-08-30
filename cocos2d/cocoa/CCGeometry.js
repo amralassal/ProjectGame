@@ -237,6 +237,15 @@ cc.Rect.CCRectIntersectsRect = function (rectA, rectB) {
  * @return {Boolean}
  * Constructor
  */
+cc.rectIntersectsRect = cc.Rect.CCRectIntersectsRect;
+
+/**
+ * @function
+ * @param {cc.Rect} rectA
+ * @param {cc.Rect} rectB
+ * @return {Boolean}
+ * Constructor
+ */
 cc.Rect.CCRectOverlapsRect = function (rectA, rectB) {
     if (rectA.origin.x + rectA.size.width < rectB.origin.x) {
         return false;
@@ -323,7 +332,7 @@ cc.size = function (w, h) {
     return {width:w, height:h};
 
 //    return cc.size(w,h);
-}
+};
 
 /**
  * @function
@@ -343,7 +352,7 @@ cc.rect = function (x, y, w, h) {
     // optimization
     return { origin:{x:x, y:y}, size:{width:w, height:h} };
 //    return cc.rect(x, y, width, height);
-}
+};
 
 /**
  * The "left bottom" point -- equivalent to cc.p(0, 0).

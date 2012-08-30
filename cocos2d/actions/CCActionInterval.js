@@ -242,6 +242,14 @@ cc.Sequence = cc.ActionInterval.extend(/** @lends cc.Sequence# */{
      */
     reverse:function () {
         return cc.Sequence._actionOneTwo(this._actions[1].reverse(), this._actions[0].reverse());
+    },
+
+    /**
+     * to copy object with deep copy.
+     * @return {object}
+     */
+    copy:function () {
+        return cc.Sequence._actionOneTwo(this._actions[0].copy(), this._actions[1].copy() );
     }
 });
 /** helper constructor to create an array of sequenceable actions
