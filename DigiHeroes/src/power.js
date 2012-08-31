@@ -24,7 +24,7 @@ var PowerLayer = cc.Layer.extend({
 		menu.alignItemsHorizontally();
 		menu.setPosition(cc.p(600,150))
 		this.powerSelected = -1
-		cc.DOM.convert(item1, item2, item3);
+		//cc.DOM.convert(item1, item2, item3);
 	},
 	
     alignMenuH:function () {

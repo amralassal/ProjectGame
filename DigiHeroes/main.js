@@ -61,5 +61,5 @@ var cocos2dApp = cc.Application.extend({
         return true;
     }
 });
-var myApp = new cocos2dApp(MainAppScene);
-//var myApp = new cocos2dApp(CustmizationToolScene);
+//var myApp = new cocos2dApp(MainAppScene);
+var myApp = new cocos2dApp(CustmizationToolScene);

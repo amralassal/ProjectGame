@@ -43,6 +43,7 @@
 			'src/Customization/customization_hero.js',
 			'src/Customization/customization_tool.js',
 			'src/Customization/customization_menu.js',
+			'src/Customization/customization_menu_indicator.js',
         ]
     };
     window.addEventListener('DOMContentLoaded', function () {
