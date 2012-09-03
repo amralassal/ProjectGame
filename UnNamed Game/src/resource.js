@@ -53,6 +53,10 @@ var hero_rs = {
 	m_3 : "res/img/buttons/3.png",
 	m_4 : "res/img/buttons/4.png",
 	m_5 : "res/img/buttons/5.png",
+	//effects
+	e_1 : "res/img/effects/explosion.png",
+	//plist
+	p_1 : "res/img/effects/explosion.plist",
 }
 
 var g_ressources = [
@@ -111,8 +115,10 @@ var g_ressources = [
 	{type:"image", src:hero_rs.m_3},
 	{type:"image", src:hero_rs.m_4},
 	{type:"image", src:hero_rs.m_5},
+	//effects
+	{type:"image", src:hero_rs.e_1},
 	//plist
-
+	{type:"plist", src:hero_rs.p_1},
     //fnt
 
     //tmx

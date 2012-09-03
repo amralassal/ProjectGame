@@ -40,11 +40,12 @@
 			'src/Fight/fight.js',
 			'src/Fight/hero.js',
 			'src/Fight/power.js',
-			'json/Fight/powers.json',
+			'json/powers.json',
 			'src/Customization/customization_hero.js',
 			'src/Customization/customization_tool.js',
 			'src/Customization/customization_menu.js',
 			'src/Customization/customization_menu_indicator.js',
+			'src/Effect/explosion.js',
         ]
     };
     window.addEventListener('DOMContentLoaded', function () {

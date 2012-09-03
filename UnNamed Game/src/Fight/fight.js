@@ -15,6 +15,7 @@ var Fight = cc.LayerColor.extend({
         this.initWithColor(new cc.Color4B(242, 246, 248, 255), 1400, 800);
         //layer1.setPosition(new cc.Point(s.width/2,s.height/2));
         //layer1.setIsRelativeAnchorPoint(true);
+		Explosion.sharedExplosion();
 		
 		this.setTouchEnabled(true);
         //this.setKeyboardEnabled(true);

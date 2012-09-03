@@ -43,6 +43,11 @@ var Hero = cc.Layer.extend({
 		if(this.newHp < 1){
 			this.newHp = 0; // so that hp doesn't count negatively
 		}
+		
+		var a = new Explosion();
+        a.setPosition(this.sprite.getPosition());
+        this.addChild(a);
+		
 		this.schedule(this._updateHp, 1 / (this.oldHp-this.newHp) )
 	},
 	_newHp:0,
