@@ -49,5 +49,6 @@ var CustmizationToolScene = cc.Scene.extend({
         var layer = new Customization();
         layer.init();
         this.addChild(layer);
+		this.addChild(new GameMenu())
     }
 })

@@ -47,6 +47,12 @@ var hero_rs = {
 	c_item3 : "res/img/customization/itemSelected.png",
 	c_item4 : "res/img/customization/helmet.png",
 	c_item5 : "res/img/customization/weapon.png",
+	//Main Menu bar
+	m_1 : "res/img/buttons/1.png",
+	m_2 : "res/img/buttons/2.png",
+	m_3 : "res/img/buttons/3.png",
+	m_4 : "res/img/buttons/4.png",
+	m_5 : "res/img/buttons/5.png",
 }
 
 var g_ressources = [
@@ -99,8 +105,13 @@ var g_ressources = [
 	{type:"image", src:hero_rs.c_item3},
 	{type:"image", src:hero_rs.c_item4},
 	{type:"image", src:hero_rs.c_item5},
-	
-    //plist
+	// Main Menu bar
+    {type:"image", src:hero_rs.m_1},
+	{type:"image", src:hero_rs.m_2},
+	{type:"image", src:hero_rs.m_3},
+	{type:"image", src:hero_rs.m_4},
+	{type:"image", src:hero_rs.m_5},
+	//plist
 
     //fnt
 

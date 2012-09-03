@@ -52,14 +52,12 @@ var cocos2dApp = cc.Application.extend({
 
         // set FPS. the default value is 1.0/60 if you don't call this
         director.setAnimationInterval(1.0 / this.config['frameRate']);
-
         // create a scene. it's an autorelease object
-
         // run
         director.runWithScene(new this.startScene());
 
         return true;
     }
 });
-//var myApp = new cocos2dApp(MainAppScene);
-var myApp = new cocos2dApp(CustmizationToolScene);
+var myApp = new cocos2dApp(MainAppScene);
+//var myApp = new cocos2dApp(CustmizationToolScene);
