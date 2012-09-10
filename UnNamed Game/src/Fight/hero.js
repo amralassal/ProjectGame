@@ -1,6 +1,6 @@
 var Hero = cc.Layer.extend({
     _currentRotation:0,
-	_sprFlipX: false,
+	sprFlipX: false,
 	sprite:null,
 	hpLabel:null,
 	_rect:null,
@@ -23,8 +23,8 @@ var Hero = cc.Layer.extend({
 		this.heroPowers = heroPowers
 		this.imgName = imgName
 		this.sprite.setPosition( point )
-		this._sprFlipX = flipX;
-		this.scheduleUpdate()
+		this.sprFlipX = flipX;
+		this.sprite.runAction( cc.FlipX.create(flipX) ) 
 		this.init()
 		
 		this.hpLabel = cc.LabelTTF.create(this.hp + '', "Arial", 28);
@@ -43,10 +43,11 @@ var Hero = cc.Layer.extend({
 		if(this.newHp < 1){
 			this.newHp = 0; // so that hp doesn't count negatively
 		}
-		
-		var a = new Explosion();
+		//this.blink()
+		/*var a = new Explosion();
         a.setPosition(this.sprite.getPosition());
-        this.addChild(a);
+        this.getParent().addChild(a);
+		*/
 		
 		this.schedule(this._updateHp, 1 / (this.oldHp-this.newHp) )
 	},
@@ -58,11 +59,9 @@ var Hero = cc.Layer.extend({
 			this.oldHp--;
 			this.hpLabel.setString( this.oldHp );
 		}else{
-			console.log('Exit')
 			this.unschedule(this._updateHp)
 			if(this.newHp == 0){ 
 				this.die() //trigger dying effect
-				
 			}
 			return;
 		}
@@ -76,15 +75,6 @@ var Hero = cc.Layer.extend({
     },
 	
     update:function(dt){
-		this.sprite.setFlipX( this._sprFlipX )
-		//this.setRotation(this._currentRotation);
-		//var bE = this._transitionMove(4, 2500);
-		//this.setPosition( cc.p( this.shiftX + bE, this.shiftY-bE ) );
-		//this.setContentSize( cc.size( this.width-bE, this.height+bE ) );
-		//this._rect.size.width = this.width-bE
-		//this._rect.size.height = this.height+bE
-		//console.log( this._rect.size.width , this._rect.size.height = this.height+bE)
-		//ctx.drawImage(this.image, 0, 0, this.frameWidth, this.frameHeight, this.shiftX+bE, this.shiftY-bE, this.frameWidth-bE, this.frameHeight+bE);
     },
 	onEnter:function () {
         //cc.Director.getInstance().getTouchDispatcher().addTargetedDelegate(this, 0, true);
@@ -94,6 +84,9 @@ var Hero = cc.Layer.extend({
         //cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         //this._super();
     },
+	destroy:function () {
+        this.removeFromParentAndCleanup(true);
+    },
 	containsTouchLocation:function (touch) {
         var getPoint = touch.getLocation();
         var myRect = this.rect();
@@ -102,34 +95,6 @@ var Hero = cc.Layer.extend({
 		
         return cc.Rect.CCRectContainsPoint(myRect, getPoint);//this.convertTouchToNodeSpaceAR(touch));
     },
-	onTouchBegan:function (touch, event) {
-        //if (this._state != PADDLE_STATE_UNGRABBED) return false;
-        //if (this.containsTouchLocation(touch)) console.log(this.imgName);
-        //this._state = PADDLE_STATE_GRABBED;
-        return true;
-    },
-	onTouchMoved:function (touch, event) {
-        // If it weren't for the TouchDispatcher, you would need to keep a reference
-        // to the touch from touchBegan and check that the current touch is the same
-        // as that one.
-        // Actually, it would be even more complicated since in the Cocos dispatcher
-        // you get CCSets instead of 1 UITouch, so you'd need to loop through the set
-        // in each touchXXX method.
-        /*
-		cc.Assert(this._state == PADDLE_STATE_GRABBED, "Paddle - Unexpected state!");
-
-        var touchPoint = touch.getLocation();
-        //touchPoint = cc.Director.getInstance().convertToGL( touchPoint );
-
-        this.setPosition(cc.p(touchPoint.x, this.getPosition().y));
-		*/
-    },
-    onTouchEnded:function (touch, event) {
-		/*
-        cc.Assert(this._state == PADDLE_STATE_GRABBED, "Paddle - Unexpected state!");
-        this._state = PADDLE_STATE_UNGRABBED;
-		*/
-	},
 	_transitionMove : function(amplitude, period){
 		var date = new Date();
 		var time = date.getTime();
@@ -139,10 +104,14 @@ var Hero = cc.Layer.extend({
 		return nextY
 	},
 	die : function(){
-		var fadeOut = cc.FadeOut.create(1.0);
-		var tintRed = cc.TintBy.create(1, 0, -255, -255);
-		this.sprite.runAction(fadeOut);
-		this.sprite.runAction(tintRed);
+		this.sprite.runAction( cc.TintBy.create(1, 0, -255, -255) );
+		this.sprite.runAction(cc.Sequence.create(
+			cc.FadeOut.create(1.0),
+			cc.CallFunc.create(this, this.destroy)
+        ));
+	},
+	blink : function(){
+		this.sprite.runAction( cc.Blink.create(1, 5) )
 	},
 	normal : function(){
 		var normal = cc.TintTo.create(0, 255, 255, 255);

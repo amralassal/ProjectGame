@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>explosion_01.png</key>
+            <key>explosion_1.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{158,348},{18,24}}</string>
@@ -17,7 +17,7 @@
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
-            <key>explosion_02.png</key>
+            <key>explosion_2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{296,258},{40,42}}</string>
@@ -30,7 +30,7 @@
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
-            <key>explosion_03.png</key>
+            <key>explosion_3.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{220,210},{42,48}}</string>
@@ -43,7 +43,7 @@
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
-            <key>explosion_04.png</key>
+            <key>explosion_4.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{264,210},{46,60}}</string>
@@ -56,7 +56,7 @@
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
-            <key>explosion_05.png</key>
+            <key>explosion_5.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,458},{50,56}}</string>
@@ -69,7 +69,7 @@
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
-            <key>explosion_06.png</key>
+            <key>explosion_6.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{60,458},{48,56}}</string>
@@ -82,7 +82,7 @@
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
-            <key>explosion_07.png</key>
+            <key>explosion_7.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{160,210},{56,58}}</string>
@@ -95,7 +95,7 @@
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
-            <key>explosion_08.png</key>
+            <key>explosion_8.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{292,72},{60,64}}</string>
@@ -108,7 +108,7 @@
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
-            <key>explosion_09.png</key>
+            <key>explosion_9.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{160,70},{70,68}}</string>

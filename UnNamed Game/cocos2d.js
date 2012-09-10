@@ -36,16 +36,19 @@
         //SingleEngineFile:'',
         appFiles:[
             'src/resource.js',//add your own files in order here
+			'json/powers.json',
+			'json/effects.json',
 			'src/game_menu.js',
 			'src/Fight/fight.js',
 			'src/Fight/hero.js',
 			'src/Fight/power.js',
-			'json/powers.json',
 			'src/Customization/customization_hero.js',
 			'src/Customization/customization_tool.js',
 			'src/Customization/customization_menu.js',
 			'src/Customization/customization_menu_indicator.js',
 			'src/Effect/explosion.js',
+			'src/Effect/emma.js',
+			'src/Effect/effect.js',
         ]
     };
     window.addEventListener('DOMContentLoaded', function () {

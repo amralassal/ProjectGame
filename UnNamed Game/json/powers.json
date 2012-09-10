@@ -5,18 +5,21 @@ HeroPower.p0 = {
 	name : '0',
 	imageName : '0',
 	attack : 50,
+	effect: 'fire'
 }
 
 HeroPower.p1 = {
 	name : '1',
 	imageName : '1',
 	attack : 70,
+	effect: 'ice'
 }
 
 HeroPower.p2 = {
 	name : '2',
 	imageName : '2',
 	attack :100,
+	effect: 'shock'
 }
 
 HeroPower.p3 = {

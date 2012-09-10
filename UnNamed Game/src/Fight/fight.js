@@ -15,8 +15,14 @@ var Fight = cc.LayerColor.extend({
         this.initWithColor(new cc.Color4B(242, 246, 248, 255), 1400, 800);
         //layer1.setPosition(new cc.Point(s.width/2,s.height/2));
         //layer1.setIsRelativeAnchorPoint(true);
-		Explosion.sharedExplosion();
 		
+		//Shared functions
+		Explosion.sharedExplosion();
+		Emma.sharedExplosion();
+		for( var i in gameEffects){
+			Effect.sharedEffect( i )
+		}
+		//---------------------------
 		this.setTouchEnabled(true);
         //this.setKeyboardEnabled(true);
         this.setPosition(new cc.Point(0, -20));
@@ -30,7 +36,6 @@ var Fight = cc.LayerColor.extend({
 			var hero = new Hero(i+1+'', cc.p(x[i], y[i]), i<3 ? true : false, powers );
 			this.addChild( hero );
 			this.heroes.push( hero )
-			test = hero
 			this.fightTurns.push( hero )
 			if( i < 3){
 				this.rightHeroes[i] = hero
@@ -101,8 +106,24 @@ var Fight = cc.LayerColor.extend({
 	
 	simulateFight: function(powerNum, dmgHero){
 		var damage = eval('HeroPower.p'+powerNum).attack
+		//this.hero.attack();
+		this.simulateAttack(powerNum, dmgHero)
 		dmgHero.attackedBy(damage)
 		this.whoseTurnIsIt()
+	},
+	
+	simulateAttack: function(powerNum, dmgHero){
+		var effectName = "";
+		if(powerNum % 3 == 1){
+			effectName = 'fire'
+		}else if(powerNum % 3 == 2){
+			effectName = 'ice'
+		}else{
+			effectName = 'shock'
+		}
+		var a = new Effect(effectName, this.hero, dmgHero);
+        this.addChild(a);
+		a.playEffect()
 	},
 	
     onTouchesMoved:function(pTouch,pEvent){

@@ -53,10 +53,15 @@ var hero_rs = {
 	m_3 : "res/img/buttons/3.png",
 	m_4 : "res/img/buttons/4.png",
 	m_5 : "res/img/buttons/5.png",
+	//heroes
+	h_1 : "res/img/heroes/emma/emma.png",
 	//effects
 	e_1 : "res/img/effects/explosion.png",
+	e_2 : "res/img/effects/claw.png",
 	//plist
 	p_1 : "res/img/effects/explosion.plist",
+	p_2 : "res/img/heroes/emma/emma.plist",
+	p_3 : "res/img/effects/claw.plist",
 }
 
 var g_ressources = [
@@ -115,10 +120,15 @@ var g_ressources = [
 	{type:"image", src:hero_rs.m_3},
 	{type:"image", src:hero_rs.m_4},
 	{type:"image", src:hero_rs.m_5},
+	//heroes
+	{type:"image", src:hero_rs.h_1},
 	//effects
 	{type:"image", src:hero_rs.e_1},
+	{type:"image", src:hero_rs.e_2},
 	//plist
 	{type:"plist", src:hero_rs.p_1},
+	{type:"plist", src:hero_rs.p_2},
+	{type:"plist", src:hero_rs.p_3},
     //fnt
 
     //tmx

@@ -1,0 +1,56 @@
+var gameEffects = {}
+
+//gameEffects.normal = 1,
+//gameEffects.projectile = 2,
+
+gameEffects.fire = {
+	type : 2,
+	name : "FireProjectile",
+	spriteName: 'fire',
+	frames : 6,
+	resource : 'p_3',
+	loops: 1,
+	time: 0.05,
+	afterEffect: 'fireBurn'
+}
+
+gameEffects.fireBurn = {
+	type : 1,
+	name : "FireBurn",
+	spriteName: 'fireburn',
+	frames : 15,
+	resource : 'p_3',
+	loops : 2,
+	time: 0.03
+}
+
+gameEffects.ice = {
+	type : 2,
+	name : "IceProjectile",
+	spriteName: 'ice',
+	frames : 6,
+	resource : 'p_3',
+	loops: 1,
+	time: 0.05,
+	afterEffect: 'iceFreeze'
+}
+
+gameEffects.iceFreeze= {
+	type : 1,
+	name : "IceFreeze",
+	spriteName: 'icefreeze',
+	frames : 7,
+	resource : 'p_3',
+	loops: 2,
+	time: 0.03,
+}
+
+gameEffects.shock = {
+	type : 1,
+	name : "shockWave",
+	spriteName: 'shock',
+	frames : 5,
+	resource : 'p_3',
+	loops : 4,
+	time: 0.05
+}
