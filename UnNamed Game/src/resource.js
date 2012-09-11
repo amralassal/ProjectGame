@@ -62,6 +62,14 @@ var hero_rs = {
 	p_1 : "res/img/effects/explosion.plist",
 	p_2 : "res/img/heroes/emma/emma.plist",
 	p_3 : "res/img/effects/claw.plist",
+	//sound
+	s_1 : "res/sound/fireImpact",
+	s_2 : "res/sound/explodeEffect",
+	s_3 : "res/sound/fire",
+	s_4 : "res/sound/ice",
+	s_5 : "res/sound/shock",
+	s_6 : "res/sound/death",
+	
 }
 
 var g_ressources = [
@@ -129,11 +137,18 @@ var g_ressources = [
 	{type:"plist", src:hero_rs.p_1},
 	{type:"plist", src:hero_rs.p_2},
 	{type:"plist", src:hero_rs.p_3},
-    //fnt
+    //sound
+	{type:"effect", src:hero_rs.s_1},
+	{type:"effect", src:hero_rs.s_2},
+	{type:"effect", src:hero_rs.s_3},
+	{type:"effect", src:hero_rs.s_4},
+	{type:"effect", src:hero_rs.s_5},
+	{type:"effect", src:hero_rs.s_6},
+	//fnt
 
     //tmx
 
     //bgm
 
-    //effect
+    
 ];

@@ -11,7 +11,8 @@ gameEffects.fire = {
 	resource : 'p_3',
 	loops: 1,
 	time: 0.05,
-	afterEffect: 'fireBurn'
+	sound: 'fire',
+	afterEffect: 'fireBurn',
 }
 
 gameEffects.fireBurn = {
@@ -21,7 +22,8 @@ gameEffects.fireBurn = {
 	frames : 15,
 	resource : 'p_3',
 	loops : 2,
-	time: 0.03
+	time: 0.03,
+	sound: 'explodeEffect',
 }
 
 gameEffects.ice = {
@@ -32,6 +34,7 @@ gameEffects.ice = {
 	resource : 'p_3',
 	loops: 1,
 	time: 0.05,
+	sound: 'ice',
 	afterEffect: 'iceFreeze'
 }
 
@@ -43,6 +46,7 @@ gameEffects.iceFreeze= {
 	resource : 'p_3',
 	loops: 2,
 	time: 0.03,
+	sound: 'fireImpact',
 }
 
 gameEffects.shock = {
@@ -52,5 +56,6 @@ gameEffects.shock = {
 	frames : 5,
 	resource : 'p_3',
 	loops : 4,
-	time: 0.05
+	time: 0.05,
+	sound: 'shock',
 }

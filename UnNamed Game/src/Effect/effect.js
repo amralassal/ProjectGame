@@ -21,6 +21,7 @@ var Effect = cc.Sprite.extend({
 			case 1: this.playNormalEffect();break;
 			case 2: this.playProjectileEffect() ;break;
 		}
+		this.playSound()
 	},
 	
 	playNormalEffect: function(){
@@ -50,6 +51,9 @@ var Effect = cc.Sprite.extend({
 				self.destroy()
 			})
 		));
+	},
+	playSound : function(){
+		cc.AudioEngine.getInstance().playEffect(hero_rs[gameSounds[this.hash.sound].path], false);
 	},
     destroy:function () {
         this.removeFromParentAndCleanup(true);

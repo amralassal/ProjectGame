@@ -109,6 +109,7 @@ var Hero = cc.Layer.extend({
 			cc.FadeOut.create(1.0),
 			cc.CallFunc.create(this, this.destroy)
         ));
+		cc.AudioEngine.getInstance().playEffect(hero_rs.s_6, false);
 	},
 	blink : function(){
 		this.sprite.runAction( cc.Blink.create(1, 5) )

@@ -36,8 +36,11 @@
         //SingleEngineFile:'',
         appFiles:[
             'src/resource.js',//add your own files in order here
+			//json
 			'json/powers.json',
 			'json/effects.json',
+			'json/sounds.json',
+			//classes
 			'src/game_menu.js',
 			'src/Fight/fight.js',
 			'src/Fight/hero.js',
