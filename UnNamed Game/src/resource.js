@@ -69,7 +69,9 @@ var hero_rs = {
 	s_4 : "res/sound/ice",
 	s_5 : "res/sound/shock",
 	s_6 : "res/sound/death",
-	
+	//
+	//animation
+	a_1 : "res/img/animations/monster.SCML",
 }
 
 var g_ressources = [
@@ -149,6 +151,8 @@ var g_ressources = [
     //tmx
 
     //bgm
-
+	
+	//animation
+	{type:"spriter", src:hero_rs.a_1},
     
 ];
