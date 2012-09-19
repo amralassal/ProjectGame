@@ -1,0 +1,20 @@
+var gameSounds = {}
+
+gameSounds.fireImpact = {
+	path: 's_1'
+}
+
+gameSounds.explodeEffect = {
+	path: 's_2'
+}
+
+gameSounds.fire = {
+	path: 's_3'
+}
+
+gameSounds.ice = {
+	path: 's_4'
+}
+gameSounds.shock = {
+	path: 's_5'
+}

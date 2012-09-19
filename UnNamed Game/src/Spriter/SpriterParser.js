@@ -1,35 +1,10 @@
-/****************************************************************************
- Copyright (c) 2010-2012 cocos2d-x.org
- Copyright (c) 2008-2010 Ricardo Quesada
- Copyright (c) 2011      Zynga Inc.
-
- http://www.cocos2d-x.org
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ****************************************************************************/
 
 /**
  * a SAX Parser
  * @class
  * @extends cc.Class
  */
-cc.SAXParser = cc.Class.extend(/** @lends cc.SAXParser# */{
+SpriterParser = cc.Class.extend(/** @lends cc.SAXParser# */{
     xmlDoc:null,
     parser:null,
     xmlList:[],
@@ -69,29 +44,6 @@ cc.SAXParser = cc.Class.extend(/** @lends cc.SAXParser# */{
         }
         this.plist = this._parseNode(node);
         return this.plist;
-    },
-
-    /**
-     * parse a tilemap xml from a string (xmlhttpObj.responseText)
-     * @param  {String} textxml  tilemap xml content
-     * @return {Document} xml document
-     */
-    tmxParse:function (textxml) {
-        var textxml = this.getList(textxml);
-        // get a reference to the requested corresponding xml file
-        if (window.DOMParser) {
-            this.parser = new DOMParser();
-            this.xmlDoc = this.parser.parseFromString(textxml, "text/xml");
-        } else // Internet Explorer (untested!)
-        {
-            this.xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-            this.xmlDoc.async = "false";
-            this.xmlDoc.loadXML(textxml);
-        }
-        if (this.xmlDoc == null) {
-            cc.log("xml " + this.xmlDoc + " not found!");
-        }
-        return this.xmlDoc;
     },
 
     _parseNode:function (node) {
@@ -158,32 +110,6 @@ cc.SAXParser = cc.Class.extend(/** @lends cc.SAXParser# */{
     },
 
     /**
-     * Preload plist file
-     * @param {String} filePath
-     */
-    preloadPlist:function (filePath) {
-        if (window.XMLHttpRequest) {
-            // for IE7+, Firefox, Chrome, Opera, Safari brower
-            var xmlhttp = new XMLHttpRequest();
-            // is xml file?
-            if (xmlhttp.overrideMimeType)
-                xmlhttp.overrideMimeType('text/xml');
-        } else {
-            // for IE6, IE5 brower
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        if (xmlhttp != null) {
-            // load xml
-            xmlhttp.open("GET", filePath, false);
-            xmlhttp.send(null);
-            this.xmlList[filePath] = xmlhttp.responseText;
-            cc.Loader.shareLoader().onResLoaded();
-        } else {
-            alert("Your browser does not support XMLHTTP.");
-        }
-    },
-
-    /**
      * get filename from filepath
      * @param {String} filePath
      * @return {String}
@@ -219,13 +145,13 @@ cc.SAXParser = cc.Class.extend(/** @lends cc.SAXParser# */{
 });
 
 /**
- * get a singleton SAX parser
+ * get a singleton Spriter parser
  * @function
  * @return {cc.SAXParser}
  */
-cc.SAXParser.shareParser = function () {
-    if (!cc.shareParser) {
-        cc.shareParser = new cc.SAXParser();
+SpriterParser.shareParser = function () {
+    if (!cc.spriterParser) {
+        cc.spriterParser = new cc.SpriterParser();
     }
-    return cc.shareParser;
+    return cc.spriterParser;
 };
