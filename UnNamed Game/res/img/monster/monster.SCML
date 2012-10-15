@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="a2">
-    <folder id="0" name="mon_shadows">
+    <folder id="0" name="mon_shadows" res="shadow">
         <file id="0" name="mon_shadows/shadow_idle.png" width="0" height="0"/>
     </folder>
-    <folder id="1" name="mon_arms">
+    <folder id="1" name="mon_arms" res="arm">
         <file id="0" name="mon_arms/shoulder_a.png" width="0" height="0"/>
         <file id="1" name="mon_arms/forearm_a.png" width="0" height="0"/>
         <file id="2" name="mon_arms/hand_a_1.png" width="0" height="0"/>
@@ -17,17 +17,17 @@
         <file id="10" name="mon_arms/hand_a_2.png" width="0" height="0"/>
         <file id="11" name="mon_arms/hand_a_3.png" width="0" height="0"/>
     </folder>
-    <folder id="2" name="mon_legs">
+    <folder id="2" name="mon_legs" res="leg">
         <file id="0" name="mon_legs/foot_a.png" width="0" height="0"/>
         <file id="1" name="mon_legs/thigh_a.png" width="0" height="0"/>
         <file id="2" name="mon_legs/pelvis_0.png" width="0" height="0"/>
         <file id="3" name="mon_legs/foot_0.png" width="0" height="0"/>
         <file id="4" name="mon_legs/thigh_0.png" width="0" height="0"/>
     </folder>
-    <folder id="3" name="mon_torso">
+    <folder id="3" name="mon_torso" res="torso">
         <file id="0" name="mon_torso/torso_0.png" width="0" height="0"/>
     </folder>
-    <folder id="4" name="mon_head">
+    <folder id="4" name="mon_head" res="head">
         <file id="0" name="mon_head/head_2.png" width="0" height="0"/>
         <file id="1" name="mon_head/head_3.png" width="0" height="0"/>
         <file id="2" name="mon_head/head_1.png" width="0" height="0"/>

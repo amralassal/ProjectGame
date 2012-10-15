@@ -6,6 +6,7 @@ var Hero = cc.Layer.extend({
 	_rect:null,
 	time:null,
 	hp:0,
+	hpBar:null,
 	heroPowers:null,
 	
 	rect:function () {
@@ -31,10 +32,30 @@ var Hero = cc.Layer.extend({
 		var tintRed = cc.TintBy.create(0, 0, -255, -255);
 		this.hpLabel.runAction(tintRed);
         this.hpLabel.setPosition(cc.p(point.x,point.y + 20 +heroTexture.height/2));
-		this.addChild(this.hpLabel);
+		this.loadHpStamina(point, heroTexture)
+		//this.addChild(this.hpLabel);
     },
 	init: function(){
 		this.hp = 600
+	},
+	loadHpStamina: function(point, heroTexture){
+		var texture = cc.TextureCache.getInstance().addImage(hero_rs['hp']);
+        this.hpBar = cc.Sprite.createWithTexture(texture);
+		//this.hpBar.setTextureRect( cc.rect(0,0, texture.width,texture.height) )
+		this.hpBar.setPosition(cc.p(point.x,point.y + 22 +heroTexture.height/2));
+		this.addChild(this.hpBar)
+        
+		texture = cc.TextureCache.getInstance().addImage(hero_rs['stamina']);
+        this.stamina = cc.Sprite.createWithTexture(texture);
+		this.stamina.setPosition(cc.p(point.x,point.y + 10 +heroTexture.height/2));
+		this.addChild(this.stamina)
+	},
+	_updateHpBar: function(ratio){
+		this.hpBar.setTextureRect( cc.rect(0,0, ratio * 200, 10) )
+		/*texture.width*/ /*texture.height*/
+	},
+	_updateStaminaBar: function(ratio){
+		this.stamina.setTextureRect( cc.rect(0,0, ratio * 200, 10) )
 	},
 	attackedBy: function(dmg){
 		this.oldHp = this.hp
@@ -42,14 +63,15 @@ var Hero = cc.Layer.extend({
 		this.newHp = this.hp
 		if(this.newHp < 1){
 			this.newHp = 0; // so that hp doesn't count negatively
+			this.die()
 		}
 		//this.blink()
 		/*var a = new Explosion();
         a.setPosition(this.sprite.getPosition());
         this.getParent().addChild(a);
 		*/
-		
-		this.schedule(this._updateHp, 1 / (this.oldHp-this.newHp) )
+		this._updateHpBar( this.newHp/600 )
+		//this.schedule(this._updateHp, 1 / (this.oldHp-this.newHp) )
 	},
 	_newHp:0,
 	_oldHp:0,

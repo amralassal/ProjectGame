@@ -137,7 +137,8 @@ cc.Loader = cc.Class.extend(/**  @lends cc.Loader# */{
         var sharedTextureCache = cc.TextureCache.getInstance();
         var sharedEngine = cc.AudioEngine.getInstance();
         var shareParser = cc.SAXParser.shareParser();
-
+		var spriterParser = SpriterParser.shareParser();
+		
         for (var i = 0; i < res.length; i++) {
             switch (res[i].type) {
                 case "image":
@@ -151,6 +152,10 @@ cc.Loader = cc.Class.extend(/**  @lends cc.Loader# */{
                 case "effect":
                     sharedEngine.preloadEffect(res[i].src);
                     this.resourceCount += 1;
+                    break;
+				case "spriter":
+					spriterParser.preloadSpriter(res[i].src);
+					this.resourceCount += 1;
                     break;
                 case "plist":
                 case "tmx":

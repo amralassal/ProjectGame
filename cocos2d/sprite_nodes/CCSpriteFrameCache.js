@@ -196,7 +196,6 @@ cc.SpriteFrameCache = cc.Class.extend(/** @lends cc.SpriteFrameCache# */{
      */
     addSpriteFrames:function (plist, texture) {
         var dict = cc.FileUtils.getInstance().dictionaryWithContentsOfFileThreadSafe(plist);
-		test = dict
         switch (arguments.length) {
             case 1:
                 cc.Assert(plist, "plist filename should not be NULL");

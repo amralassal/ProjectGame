@@ -31,9 +31,8 @@ var Effect = cc.Sprite.extend({
 			cc.Animate.create(animation, false),
 			cc.CallFunc.create(this, this.destroy)
         ));
-		var self = this;
 		this.runAction(cc.CallFunc.create(this, function(){
-			self.dmgHero.blink();
+			this.dmgHero.blink();
 		}))
 	},
 	playProjectileEffect: function(){
@@ -41,14 +40,13 @@ var Effect = cc.Sprite.extend({
 		this.runAction(
 			cc.RepeatForever.create( cc.Animate.create(animation, false) )
 		);
-		var self = this
 		this.runAction(cc.Sequence.create(
 			cc.MoveTo.create(1, this.dmgHero.sprite.getPosition() ),
 			cc.CallFunc.create(this, function(){
 				var a = new Effect(this.hash.afterEffect, this.hero, this.dmgHero);
-				self.getParent().addChild(a);
+				this.getParent().addChild(a);
 				a.playEffect()
-				self.destroy()
+				this.destroy()
 			})
 		));
 	},

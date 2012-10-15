@@ -43,8 +43,9 @@
 			//classes
 			'src/game_menu.js',
 			'src/Fight/fight.js',
+			'src/Fight/warrior_hero.js',
 			'src/Fight/hero.js',
-			'src/Fight/power.js',
+			'src/Fight/power_layer.js',
 			'src/Customization/customization_hero.js',
 			'src/Customization/customization_tool.js',
 			'src/Customization/customization_menu.js',
@@ -52,6 +53,8 @@
 			'src/Effect/explosion.js',
 			'src/Effect/emma.js',
 			'src/Effect/effect.js',
+			'src/Spriter/spriter_parser.js',
+			'src/Spriter/spriter_animation.js',
         ]
     };
     window.addEventListener('DOMContentLoaded', function () {

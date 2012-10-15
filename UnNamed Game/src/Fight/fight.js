@@ -26,25 +26,26 @@ var Fight = cc.LayerColor.extend({
 		this.setTouchEnabled(true);
         //this.setKeyboardEnabled(true);
         this.setPosition(new cc.Point(0, -20));
-		var x = [200, 400, 200, 1000, 800, 1000]
-		var y = [200, 400, 600, 200, 400, 600]
-		for(var i=0; i < 6; i++){
+		var x = [200, 1000, 800, 1000]
+		var y = [200, 200, 400, 600]
+		for(var i=0; i < 4; i++){
 			var powers = {}
 			powers.p1 = i*3
 			powers.p2 = i*3+1
 			powers.p3 = i*3+2
-			var hero = new Hero(i+1+'', cc.p(x[i], y[i]), i<3 ? true : false, powers );
+			if(i == 0){
+				var hero = new WarriorHero(cc.p(x[i], y[i]), i<1 ? true : false, powers );
+				this.leftHeroes[i] = hero
+			}else{
+				var hero = new Hero(i+1+'', cc.p(x[i], y[i]), i<1 ? true : false, powers );
+				this.rightHeroes[i] = hero
+			}
 			this.addChild( hero );
 			this.heroes.push( hero )
 			this.fightTurns.push( hero )
-			if( i < 3){
-				this.rightHeroes[i] = hero
-			}else{
-				this.leftHeroes[i] = hero
-			}
 		}
         //this._jetSprite.scheduleUpdate();
-        this.schedule(this.update);
+        //this.schedule(this.update);
 		this.powerLayer = new PowerLayer();
 		this.addChild(this.powerLayer)
         this.whoseTurnIsIt()

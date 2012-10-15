@@ -13,7 +13,10 @@ var Customization = cc.LayerColor.extend({
 		var w = size.width;
 		var h = size.height;
         this.initWithColor(new cc.Color4B(242, 246, 248, 255), 1400, 800);
-		var csHero = new CustomizationHero();
+		//var csHero = new CustomizationHero();
+		//this.addChild(csHero)
+		
+		var csHero = new SpriterAnimation();
 		this.addChild(csHero)
 		
 		var csMenu = new CustomizationMenu(csHero);
