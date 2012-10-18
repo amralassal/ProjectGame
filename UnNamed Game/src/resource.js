@@ -60,7 +60,9 @@ var hero_rs = {
 	c_dagger8 : "res/img/assassin/dagger/15.png",
 	c_dagger9 : "res/img/assassin/dagger/05.png",
 	c_dagger10: "res/img/assassin/dagger/01.png",
-	c_dagger_spriter:"res/img/assassin/dagger/daggers_stance.SCML",
+	c_dagger11: "res/img/assassin/dagger/12.png",
+	c_dagger12: "res/img/assassin/dagger/13.png",
+	c_dagger_spriter:"res/img/assassin/dagger/dagger_assassin.SCML",
 	
 	//Customization Menu tool
 	c_item1 : "res/img/customization/item1.png",

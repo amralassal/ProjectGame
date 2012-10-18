@@ -28,7 +28,11 @@ var WarriorHero = cc.Layer.extend({
     },
 	init: function(){
 		this.hp = 600
-		this.hero.startAnimation("First Animation")
+		this.hero.start()
+		//this.hero.startAnimation("Stance")
+		//this.hero.startAnimation("Dash")
+		//this.hero.startAnimation("Attack")
+		//this.hero.startAnimation("Back")
 	},
 	loadHpStamina: function(point, heroTexture){
 		var texture = cc.TextureCache.getInstance().addImage(hero_rs['hp']);

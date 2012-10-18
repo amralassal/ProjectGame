@@ -6,6 +6,8 @@ var SpriterAnimation = cc.Layer.extend({
 	folder: null,
 	sprites: [],
 	textures: [],
+	animations: ["Stance","Dash", "Attack", "Back"],
+	numAnim: 0,
 	posX: 200,
 	posY: 200,
 	looping: true,
@@ -22,6 +24,9 @@ var SpriterAnimation = cc.Layer.extend({
 		this.posX = point.x
 		this.posY = point.y
 	},
+	start: function(){
+		this.startAnimation(this.animations[0])
+	},
 	startAnimation:function(name){
 		this.selectedAnimation = this.animation.entity[name]
 		this.mainline = this.selectedAnimation.mainline
@@ -37,7 +42,11 @@ var SpriterAnimation = cc.Layer.extend({
 			this.sprites[i] = cc.Sprite.createWithTexture(tex);
 			this.addChild(this.sprites[i])
 		}
+		this._drawKey(0)
 		this._animate(0)
+	},
+	destroyAnimation:function(){
+		this.removeAllChildrenWithCleanup(true)
 	},
 	_animate:function(num){
 		if(num === this.mainline.length-1){
@@ -50,9 +59,10 @@ var SpriterAnimation = cc.Layer.extend({
 				}),
 				cc.DelayTime.create(deltaTime),
 				cc.CallFunc.create(this, function(){
-					if(this.looping){
-						return this._animate(0)
-					}				
+					//if(this.looping){return this._animate(0)}
+					this.numAnim = (this.numAnim+1) % 4
+					this.destroyAnimation()
+					this.startAnimation( this.animations[this.numAnim] )
 				})
 			));
 		}else{
