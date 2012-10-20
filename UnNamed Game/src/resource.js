@@ -24,13 +24,10 @@ var hero_rs = {
 	h_p16 : "res/img/powers/16.png",
 	h_p17 : "res/img/powers/17.png",
 	h_p18 : "res/img/powers/18.png",
-<<<<<<< HEAD
-=======
 	//Background
 	bg_desert_day: "res/img/background/day.png",
 	bg_desert_night: "res/img/background/night.png",
 	bg_night_cloud : "res/img/background/night_clouds.png",
->>>>>>> Spriter
 	//Customization
 	c_arm0 : "res/img/monster/mon_arms/shoulder_a.png",
 	c_arm1 : "res/img/monster/mon_arms/forearm_a.png",
@@ -135,13 +132,10 @@ var g_ressources = [
 	{type:"image", src:hero_rs.h_p16},
 	{type:"image", src:hero_rs.h_p17},
 	{type:"image", src:hero_rs.h_p18},
-<<<<<<< HEAD
-=======
 	//Background
 	{type:"image", src:hero_rs.bg_desert_day},
 	{type:"image", src:hero_rs.bg_desert_night},
 	{type:"image", src:hero_rs.bg_night_cloud},
->>>>>>> Spriter
 	//Customization
 	{type:"image", src:hero_rs.c_arm0},
 	{type:"image", src:hero_rs.c_arm1},
