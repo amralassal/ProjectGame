@@ -6,15 +6,17 @@ var SpriterAnimation = cc.Layer.extend({
 	folder: null,
 	sprites: [],
 	textures: [],
-	animations: ["Stance","Dash", "Attack", "Back"],
+	animations:[],
+	standardAnimation:[],
+	newAnimation: false, // to stop the already working animation and to start a new one
 	numAnim: 0,
 	posX: 200,
 	posY: 200,
 	looping: true,
-    ctor:function(animation){
+    ctor:function(res){
         this._super();
 		//this.animation = cc.spriterParser.parse(hero_rs.a_1)
-		this.animation = cc.spriterParser.parse(hero_rs.c_dagger_spriter)
+		this.animation = cc.spriterParser.parse(hero_rs[res])
 		this._loadTextures()
 		//this.startAnimation('Idle')
 		//this.startAnimation('Posture')
@@ -24,8 +26,22 @@ var SpriterAnimation = cc.Layer.extend({
 		this.posX = point.x
 		this.posY = point.y
 	},
-	start: function(){
+	_initAnimation:function(animationArray, looping){
+		this.looping = looping
+		this.animations = []
+		this.numAnim = 0;
+		for(var i=0; i<animationArray.length; i++){this.animations[i] = animationArray[i]}
+	},
+	setStandardAnimation:function(animationArray){
+		for(var i=0; i<animationArray.length; i++){this.standardAnimation[i] = animationArray[i]}
+	},
+	start: function(animationArray, looping){
+		this._initAnimation(animationArray, looping)
 		this.startAnimation(this.animations[0])
+	},
+	startAllOver: function(animationArray, looping){
+		this._initAnimation(animationArray, looping)
+		this.newAnimation = true
 	},
 	startAnimation:function(name){
 		this.selectedAnimation = this.animation.entity[name]
@@ -49,6 +65,12 @@ var SpriterAnimation = cc.Layer.extend({
 		this.removeAllChildrenWithCleanup(true)
 	},
 	_animate:function(num){
+		if(this.newAnimation){
+			this.newAnimation = false
+			this.destroyAnimation()
+			this.startAnimation(this.animations[0])
+			return;
+		}
 		if(num === this.mainline.length-1){
 			//Draw last key & wait for the length of the animation to finish
 			var deltaTime = ( this.selectedAnimation.length - this.mainline[num].time) /1000
@@ -59,10 +81,16 @@ var SpriterAnimation = cc.Layer.extend({
 				}),
 				cc.DelayTime.create(deltaTime),
 				cc.CallFunc.create(this, function(){
-					//if(this.looping){return this._animate(0)}
-					this.numAnim = (this.numAnim+1) % 4
+					this.numAnim++
 					this.destroyAnimation()
-					this.startAnimation( this.animations[this.numAnim] )
+					if(this.numAnim < this.animations.length){
+						this.startAnimation( this.animations[this.numAnim] )
+					}else if(this.looping){
+						this.numAnim = 0;
+						this.startAnimation( this.animations[0] )
+					}else{
+						this.start( this.standardAnimation, true)
+					}
 				})
 			));
 		}else{

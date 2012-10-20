@@ -1,0 +1,8 @@
+var gameHeroes = {}
+
+gameHeroes.dagger = {
+	powers:["slash"],
+	res: "c_dagger_spriter",
+	normal : ["Stance"],
+	slash: ["Dash", "Attack", "Back"],
+}

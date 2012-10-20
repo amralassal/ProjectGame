@@ -7,19 +7,20 @@ var WarriorHero = cc.Layer.extend({
 	time:null,
 	hp:0,
 	hpBar:null,
-	heroPowers:null,
+	type:null,
+	spriter:null,
 	
 	rect:function () {
         return cc.rect(-this._rect.size.width / 2, -this._rect.size.height / 2, this._rect.size.width, this._rect.size.height);
     },
 	
-    ctor:function(point, flipX, heroPowers){
+    ctor:function(point, flipX, type){
         this._super();
-		this.hero = new SpriterAnimation();
-		this.addChild(this.hero)
-		//this._rect = cc.rect(0, 0, heroTexture.width, heroTexture.height);
-		this.heroPowers = heroPowers
-		this.hero.setPosition( point )
+		this.type = gameHeroes[type]
+		this.spriter = new SpriterAnimation(this.type.res);
+		this.addChild(this.spriter)
+		//this._rect = cc.rect(0, 0, spriterTexture.width, spriterTexture.height);
+		this.spriter.setPosition(point)
 		//this.sprFlipX = flipX;
 		//this.sprite.runAction( cc.FlipX.create(flipX) ) 
 		this.loadHpStamina(point)
@@ -28,11 +29,15 @@ var WarriorHero = cc.Layer.extend({
     },
 	init: function(){
 		this.hp = 600
-		this.hero.start()
+		this.spriter.setStandardAnimation(this.type.normal)
+		this.spriter.start(this.type.normal, true)
 		//this.hero.startAnimation("Stance")
 		//this.hero.startAnimation("Dash")
 		//this.hero.startAnimation("Attack")
 		//this.hero.startAnimation("Back")
+	},
+	activatePower:function(powerName){
+		this.spriter.startAllOver(this.type[powerName], false)
 	},
 	loadHpStamina: function(point, heroTexture){
 		var texture = cc.TextureCache.getInstance().addImage(hero_rs['hp']);
@@ -78,13 +83,15 @@ var WarriorHero = cc.Layer.extend({
         this.removeFromParentAndCleanup(true);
     },
 	containsTouchLocation:function (touch) {
-        var getPoint = touch.getLocation();
+        /*var getPoint = touch.getLocation();
         var myRect = this.rect();
         myRect.origin.x += this.sprite.getPosition().x;
         myRect.origin.y += this.sprite.getPosition().y;
 		
         return cc.Rect.CCRectContainsPoint(myRect, getPoint);//this.convertTouchToNodeSpaceAR(touch));
-    },
+		*/
+		return false
+	},
 	die : function(){
 		this.sprite.runAction( cc.TintBy.create(1, 0, -255, -255) );
 		this.sprite.runAction(cc.Sequence.create(

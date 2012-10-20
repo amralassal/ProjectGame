@@ -10,13 +10,12 @@ var PowerLayer = cc.Layer.extend({
         //this.alignMenuH();
     },
 	init:function(hero){
-		this.hero = hero
-		var p = this.hero.heroPowers
 		this.removeChildByTag(1)
-		
-		var item1 = cc.MenuItemImage.create(eval('hero_rs.h_p'+p.p1), eval('hero_rs.h_p'+p.p1), this, function(){this.power(1)});
-		var item2 = cc.MenuItemImage.create(eval('hero_rs.h_p'+p.p2), eval('hero_rs.h_p'+p.p2), this, function(){this.power(2)});
-		var item3 = cc.MenuItemImage.create(eval('hero_rs.h_p'+p.p3), eval('hero_rs.h_p'+p.p3), this, function(){this.power(3)});
+		this.hero = hero
+		var powers = this.hero.type.powers
+		var item1 = cc.MenuItemImage.create(eval('hero_rs.h_p1'), eval('hero_rs.h_p1'), this, function(){this.power(powers[0])});
+		var item2 = cc.MenuItemImage.create(eval('hero_rs.h_p2'), eval('hero_rs.h_p2'), this, function(){this.power(powers[0])});
+		var item3 = cc.MenuItemImage.create(eval('hero_rs.h_p3'), eval('hero_rs.h_p3'), this, function(){this.power(powers[0])});
 		var menu = cc.Menu.create(item1, item2, item3);
 		menu.setTag(1)
 		
@@ -59,8 +58,8 @@ var PowerLayer = cc.Layer.extend({
             }
         }
     },
-	power:function(num){
-		this.powerSelected = num;
+	power:function(name){
+		this.powerSelected = name;
 	},
     menuCallbackOpacity:function (sender) {
         var menu = sender.getParent();

@@ -40,6 +40,7 @@
 			'json/powers.json',
 			'json/effects.json',
 			'json/sounds.json',
+			'json/heroes.json',
 			//classes
 			'src/game_menu.js',
 			'src/Fight/fight.js',

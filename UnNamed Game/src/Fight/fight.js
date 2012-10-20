@@ -34,7 +34,7 @@ var Fight = cc.LayerColor.extend({
 			powers.p2 = i*3+1
 			powers.p3 = i*3+2
 			if(i == 0){
-				var hero = new WarriorHero(cc.p(x[i], y[i]), i<1 ? true : false, powers );
+				var hero = new WarriorHero(cc.p(x[i], y[i]), i<1 ? true : false, "dagger" );
 				this.leftHeroes[i] = hero
 			}else{
 				var hero = new Hero(i+1+'', cc.p(x[i], y[i]), i<1 ? true : false, powers );
@@ -80,7 +80,8 @@ var Fight = cc.LayerColor.extend({
 	whoseTurnIsIt : function(){
 		var hero = this.fightTurns.shift();
 		this.startFight( hero );
-		this.fightTurns.push( hero );
+		//this.fightTurns.push( hero );
+		this.fightTurns.unshift( hero );
 	},
 	startFight : function(hero){
 		this.hero = hero;
@@ -105,10 +106,11 @@ var Fight = cc.LayerColor.extend({
 		console.log('touch')
     },
 	
-	simulateFight: function(powerNum, dmgHero){
-		var damage = eval('HeroPower.p'+powerNum).attack
+	simulateFight: function(powerName, dmgHero){
+		var damage = 100 //eval('HeroPower.p1').attack
 		//this.hero.attack();
-		this.simulateAttack(powerNum, dmgHero)
+		//this.simulateAttack(powerNum, dmgHero)
+		this.hero.activatePower(powerName)
 		dmgHero.attackedBy(damage)
 		this.whoseTurnIsIt()
 	},
