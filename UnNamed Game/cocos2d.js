@@ -43,6 +43,10 @@
 			'json/heroes.json',
 			//classes
 			'src/game_menu.js',
+<<<<<<< HEAD
+=======
+			'src/Fight/bg.js',
+>>>>>>> Spriter
 			'src/Fight/fight.js',
 			'src/Fight/warrior_hero.js',
 			'src/Fight/hero.js',

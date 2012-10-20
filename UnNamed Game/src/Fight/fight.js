@@ -4,6 +4,10 @@ var Fight = cc.LayerColor.extend({
 	rightHeroes:{},
 	leftHeroes:{},
 	fightTurns:[],
+<<<<<<< HEAD
+=======
+	bg:null,
+>>>>>>> Spriter
 	powerLayer:null,
 	selectedHero:null,
 	
@@ -15,7 +19,10 @@ var Fight = cc.LayerColor.extend({
         this.initWithColor(new cc.Color4B(242, 246, 248, 255), 1400, 800);
         //layer1.setPosition(new cc.Point(s.width/2,s.height/2));
         //layer1.setIsRelativeAnchorPoint(true);
+<<<<<<< HEAD
 		
+=======
+>>>>>>> Spriter
 		//Shared functions
 		Explosion.sharedExplosion();
 		Emma.sharedExplosion();
@@ -23,11 +30,25 @@ var Fight = cc.LayerColor.extend({
 			Effect.sharedEffect( i )
 		}
 		//---------------------------
+<<<<<<< HEAD
 		this.setTouchEnabled(true);
         //this.setKeyboardEnabled(true);
         this.setPosition(new cc.Point(0, -20));
 		var x = [200, 1000, 800, 1000]
 		var y = [200, 200, 400, 600]
+=======
+		//Initialize BackGround
+		
+		//this.bg = new Background('desert_night',['night_cloud']);
+		this.bg = new Background('desert_day');
+		this.addChild(this.bg)
+		//---------------------------
+		this.setTouchEnabled(true);
+        //this.setKeyboardEnabled(true);
+        this.setPosition(new cc.Point(0, -20));
+		var x = [200, 1000, 800, 400]
+		var y = [200, 200, 400, 350]
+>>>>>>> Spriter
 		for(var i=0; i < 4; i++){
 			var powers = {}
 			powers.p1 = i*3
@@ -110,7 +131,11 @@ var Fight = cc.LayerColor.extend({
 		var damage = 100 //eval('HeroPower.p1').attack
 		//this.hero.attack();
 		//this.simulateAttack(powerNum, dmgHero)
+<<<<<<< HEAD
 		this.hero.activatePower(powerName)
+=======
+		this.hero.activatePower(powerName, dmgHero.sprite.getPosition())
+>>>>>>> Spriter
 		dmgHero.attackedBy(damage)
 		this.whoseTurnIsIt()
 	},

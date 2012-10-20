@@ -7,11 +7,23 @@ var SpriterAnimation = cc.Layer.extend({
 	sprites: [],
 	textures: [],
 	animations:[],
+<<<<<<< HEAD
 	standardAnimation:[],
 	newAnimation: false, // to stop the already working animation and to start a new one
 	numAnim: 0,
 	posX: 200,
 	posY: 200,
+=======
+	animationState:[], // 0 heroPlace, 1 heroPlace to enemyPlace, 2 enemyPlace, 3 enemyPlace to heroPlace
+	standardAnimation:[],
+	newAnimation: false, // to stop the already working animation and to start a new one
+	numAnim: 0,
+	_pos:null, // calcuate the position for every animation frame
+	posX: 0,
+	posY: 0,
+	endPosX:0,
+	endPosY:0,
+>>>>>>> Spriter
 	looping: true,
     ctor:function(res){
         this._super();
@@ -22,6 +34,7 @@ var SpriterAnimation = cc.Layer.extend({
 		//this.startAnimation('Posture')
 		//this.startAnimation('First Animation')
     },
+<<<<<<< HEAD
 	setPosition:function(point){
 		this.posX = point.x
 		this.posY = point.y
@@ -31,6 +44,19 @@ var SpriterAnimation = cc.Layer.extend({
 		this.animations = []
 		this.numAnim = 0;
 		for(var i=0; i<animationArray.length; i++){this.animations[i] = animationArray[i]}
+=======
+	setInitPosition:function(p){
+		this.setStartPosition(p)
+		this.setEndPosition(p)
+	},
+	setStartPosition:function(point){
+		this.posX = point.x
+		this.posY = point.y
+	},
+	setEndPosition:function(point){
+		this.endPosX = point.x
+		this.endPosY = point.y
+>>>>>>> Spriter
 	},
 	setStandardAnimation:function(animationArray){
 		for(var i=0; i<animationArray.length; i++){this.standardAnimation[i] = animationArray[i]}
@@ -43,11 +69,27 @@ var SpriterAnimation = cc.Layer.extend({
 		this._initAnimation(animationArray, looping)
 		this.newAnimation = true
 	},
+<<<<<<< HEAD
+=======
+	_initAnimation:function(animationArray, looping){
+		this.looping = looping
+		this.animations = []
+		this.numAnim = 0;
+		for(var i=0; i<animationArray[0].length; i++){
+			this.animations[i] = animationArray[0][i]
+			this.animationState[i] = animationArray[1][i]
+		}
+	},
+>>>>>>> Spriter
 	startAnimation:function(name){
 		this.selectedAnimation = this.animation.entity[name]
 		this.mainline = this.selectedAnimation.mainline
 		this.timeline = this.selectedAnimation.timeline
 		this.folder = this.animation.folder
+<<<<<<< HEAD
+=======
+		this._setPos()
+>>>>>>> Spriter
 		//draw the first key
 		var array = this.mainline[0].object_ref
 		for(var i=0 ;i<array.length;i++){
@@ -68,6 +110,10 @@ var SpriterAnimation = cc.Layer.extend({
 		if(this.newAnimation){
 			this.newAnimation = false
 			this.destroyAnimation()
+<<<<<<< HEAD
+=======
+			this.numAnim = 0
+>>>>>>> Spriter
 			this.startAnimation(this.animations[0])
 			return;
 		}
@@ -77,7 +123,10 @@ var SpriterAnimation = cc.Layer.extend({
 			this.runAction(cc.Sequence.create(
 				cc.CallFunc.create(this, function(){
 					this._drawKey(num)
+<<<<<<< HEAD
 					//this._moveToNextKey(0, num, deltaTime) //if u want that last key moves to the first key
+=======
+>>>>>>> Spriter
 				}),
 				cc.DelayTime.create(deltaTime),
 				cc.CallFunc.create(this, function(){
@@ -108,7 +157,12 @@ var SpriterAnimation = cc.Layer.extend({
 		}
 	},
 	_drawKey:function(k){
+<<<<<<< HEAD
 		var array = this.mainline[k].object_ref	
+=======
+		var array = this.mainline[k].object_ref
+		var p = this._pos(this.mainline[k].time)
+>>>>>>> Spriter
 		for( var i=0; i < array.length; i++){
 			var node = array[i]
 			var key = this.timeline[node.timeline][node.key]
@@ -119,6 +173,7 @@ var SpriterAnimation = cc.Layer.extend({
 				sp.initWithTexture(tex)
 			}
 			sp.setAnchorPoint( cc.p(obj.pivot_x,obj.pivot_y) )
+<<<<<<< HEAD
 			sp.setPosition( cc.p( this.posX + obj.x,this.posY + obj.y) )
 			sp.setRotation( obj.angle * -1)
 		}
@@ -136,6 +191,25 @@ var SpriterAnimation = cc.Layer.extend({
 			deltaTime = ( time ? time : ( key.time - prekey.time ) /1000 )//time in milliseconds
 			this.sprites[i].runAction(
 				cc.MoveTo.create(deltaTime, cc.p(this.posX+obj.x, this.posY+obj.y) )
+=======
+			sp.setPosition( cc.p( p.x + obj.x,p.y + obj.y) )
+			sp.setRotation( obj.angle * -1)
+		}
+	},
+	_moveToNextKey:function(nKey){
+		var array = this.mainline[nKey].object_ref
+		var p = this._pos(this.mainline[nKey].time)
+		var deltaTime = 0
+		for( var i=0; i < array.length; i++){
+			var node = array[i]
+			var prekey = this.timeline[node.timeline][nKey -1]
+			var key = this.timeline[node.timeline][nKey]
+			var obj = key.object
+			var preobj = prekey.object
+			deltaTime = ( key.time - prekey.time ) /1000 //time in milliseconds
+			this.sprites[i].runAction(
+				cc.MoveTo.create(deltaTime, cc.p(p.x + obj.x,p.y + obj.y) )
+>>>>>>> Spriter
 			)
 			var diff = obj.angle - preobj.angle
 			if(diff == 0){
@@ -153,6 +227,20 @@ var SpriterAnimation = cc.Layer.extend({
 			}
 		}
 	},
+<<<<<<< HEAD
+=======
+	_setPos:function(){
+		var func;
+		var tt = this.mainline[ this.mainline.length-1 ].time;// total time of the last key
+		switch(this.animationState[this.numAnim]){
+			case 0: func = function(){return {x:this.posX, y:this.posY}};break;
+			case 1: func = function(t){return{x:this.posX+(this.endPosX-this.posX)*t/tt, y:this.posY+(this.endPosY-this.posY)*t/tt}};break;
+			case 2: func = function(){return {x:this.endPosX, y:this.endPosY}};break;
+			case 3: func = function(t){return {x:this.endPosX+(this.posX-this.endPosX)*t/tt, y:this.endPosY+(this.posY-this.endPosY)*t/tt}};break;
+		}
+		this._pos = func
+	},
+>>>>>>> Spriter
 	_loadTextures:function(){
 		var folders = this.animation.folder
 		var len = folders.length

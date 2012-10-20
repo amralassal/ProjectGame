@@ -1,8 +1,18 @@
 var gameHeroes = {}
 
+<<<<<<< HEAD
 gameHeroes.dagger = {
 	powers:["slash"],
 	res: "c_dagger_spriter",
 	normal : ["Stance"],
 	slash: ["Dash", "Attack", "Back"],
+=======
+// 0 heroPlace, 1 heroPlace to enemyPlace, 2 enemyPlace, 3 enemyPlace to heroPlace
+
+gameHeroes.dagger = {
+	powers:["slash"],
+	res: "c_dagger_spriter",
+	normal: [ ["Stance"], [0] ],
+	slash: [ ["Dash", "Attack", "Back"], [1, 2, 3] ]
+>>>>>>> Spriter
 }

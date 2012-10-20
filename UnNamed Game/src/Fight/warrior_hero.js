@@ -9,6 +9,10 @@ var WarriorHero = cc.Layer.extend({
 	hpBar:null,
 	type:null,
 	spriter:null,
+<<<<<<< HEAD
+=======
+	position:null,
+>>>>>>> Spriter
 	
 	rect:function () {
         return cc.rect(-this._rect.size.width / 2, -this._rect.size.height / 2, this._rect.size.width, this._rect.size.height);
@@ -18,13 +22,23 @@ var WarriorHero = cc.Layer.extend({
         this._super();
 		this.type = gameHeroes[type]
 		this.spriter = new SpriterAnimation(this.type.res);
+<<<<<<< HEAD
 		this.addChild(this.spriter)
 		//this._rect = cc.rect(0, 0, spriterTexture.width, spriterTexture.height);
 		this.spriter.setPosition(point)
+=======
+		//this._rect = cc.rect(0, 0, spriterTexture.width, spriterTexture.height);
+		this.spriter.setInitPosition(point)
+		this.position = point
+>>>>>>> Spriter
 		//this.sprFlipX = flipX;
 		//this.sprite.runAction( cc.FlipX.create(flipX) ) 
 		this.loadHpStamina(point)
 		this.init()
+<<<<<<< HEAD
+=======
+		this.addChild(this.spriter)
+>>>>>>> Spriter
 		//this.addChild(this.hpLabel);
     },
 	init: function(){
@@ -36,7 +50,12 @@ var WarriorHero = cc.Layer.extend({
 		//this.hero.startAnimation("Attack")
 		//this.hero.startAnimation("Back")
 	},
+<<<<<<< HEAD
 	activatePower:function(powerName){
+=======
+	activatePower:function(powerName, destPosition){
+		this.spriter.setEndPosition(destPosition)
+>>>>>>> Spriter
 		this.spriter.startAllOver(this.type[powerName], false)
 	},
 	loadHpStamina: function(point, heroTexture){
