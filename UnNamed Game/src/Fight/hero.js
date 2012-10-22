@@ -25,7 +25,7 @@ var Hero = cc.Layer.extend({
 		this.imgName = imgName
 		this.sprite.setPosition( point )
 		this.sprFlipX = flipX;
-		this.sprite.runAction( cc.FlipX.create(flipX) ) 
+		this.sprite.runAction( cc.FlipX.create(flipX) )
 		this.init()
 		
 		this.hpLabel = cc.LabelTTF.create(this.hp + '', "Arial", 28);

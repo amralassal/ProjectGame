@@ -4,11 +4,11 @@ var SpriterAnimation = cc.Layer.extend({
 	mainline: null,
 	timeline: null,
 	folder: null,
-	sprites: [],
-	textures: [],
-	animations:[],
-	animationState:[], // 0 heroPlace, 1 heroPlace to enemyPlace, 2 enemyPlace, 3 enemyPlace to heroPlace
-	standardAnimation:[],
+	sprites: null,
+	textures: null,
+	animations: null,
+	animationState: null, // 0 heroPlace, 1 heroPlace to enemyPlace, 2 enemyPlace, 3 enemyPlace to heroPlace
+	standardAnimation: null,
 	newAnimation: false, // to stop the already working animation and to start a new one
 	numAnim: 0,
 	_pos:null, // calcuate the position for every animation frame
@@ -17,15 +17,31 @@ var SpriterAnimation = cc.Layer.extend({
 	endPosX:0,
 	endPosY:0,
 	looping: true,
-    ctor:function(res){
+	//Flip
+	_f:1,//This variable is used to indicate whether the character is flipped or not. 1 indicates not flipped(normal), -1 indicates flipped
+	_f_anc:0,//Variable used in the setAnchorPoint func
+    ctor:function(res, flip){
         this._super();
+		this.initialize()
 		//this.animation = cc.spriterParser.parse(hero_rs.a_1)
-		this.animation = cc.spriterParser.parse(hero_rs[res])
+		if(flip===true){this._flip()}//character is flipped
+		this.animation = cc.spriterParser.parse(hero_rs["c_"+res+"_spriter"])
 		this._loadTextures()
 		//this.startAnimation('Idle')
 		//this.startAnimation('Posture')
 		//this.startAnimation('First Animation')
     },
+	initialize:function(){
+		this.sprites = []
+		this.textures = []
+		this.animations = []
+		this.animationState = [] // 0 heroPlace, 1 heroPlace to enemyPlace, 2 enemyPlace, 3 enemyPlace to heroPlace
+		this.standardAnimation = []
+	},
+	_flip:function(){
+		this._f = -1
+		this._f_anc = (this._f == 1? 0:1)
+	},
 	setInitPosition:function(p){
 		this.setStartPosition(p)
 		this.setEndPosition(p)
@@ -72,6 +88,7 @@ var SpriterAnimation = cc.Layer.extend({
 			var obj = key.object
 			var tex = this.textures[obj.folder][obj.file]
 			this.sprites[i] = cc.Sprite.createWithTexture(tex);
+			if(this._f ===-1){this.sprites[i].setFlipX(true)}//character is flipped
 			this.addChild(this.sprites[i])
 		}
 		this._drawKey(0)
@@ -135,9 +152,9 @@ var SpriterAnimation = cc.Layer.extend({
 			if(sp.getTexture() !== tex){
 				sp.initWithTexture(tex)
 			}
-			sp.setAnchorPoint( cc.p(obj.pivot_x,obj.pivot_y) )
-			sp.setPosition( cc.p( p.x + obj.x,p.y + obj.y) )
-			sp.setRotation( obj.angle * -1)
+			sp.setAnchorPoint( cc.p(this._f_anc + obj.pivot_x * this._f,obj.pivot_y) )
+			sp.setPosition( cc.p( p.x + obj.x * this._f,p.y + obj.y) )
+			sp.setRotation( obj.angle * -1 * this._f)
 		}
 	},
 	_moveToNextKey:function(nKey){
@@ -152,7 +169,7 @@ var SpriterAnimation = cc.Layer.extend({
 			var preobj = prekey.object
 			deltaTime = ( key.time - prekey.time ) /1000 //time in milliseconds
 			this.sprites[i].runAction(
-				cc.MoveTo.create(deltaTime, cc.p(p.x + obj.x,p.y + obj.y) )
+				cc.MoveTo.create(deltaTime, cc.p(p.x + obj.x * this._f,p.y + obj.y) )
 			)
 			var diff = obj.angle - preobj.angle
 			if(diff == 0){
@@ -165,7 +182,7 @@ var SpriterAnimation = cc.Layer.extend({
 				}
 				this.sprites[i].runAction(
 				//cc.RotateTo.create(deltaTime, obj.angle * -1 )
-					cc.RotateBy.create(deltaTime, diff * -1 )
+					cc.RotateBy.create(deltaTime, diff * -1 * this._f)
 				)
 			}
 		}

@@ -66,8 +66,8 @@ var hero_rs = {
 	c_dagger10: "res/img/assassin/dagger/01.png",
 	c_dagger11: "res/img/assassin/dagger/12.png",
 	c_dagger12: "res/img/assassin/dagger/13.png",
+	c_dagger13: "res/img/assassin/dagger/02.png",
 	c_dagger_spriter:"res/img/assassin/dagger/dagger_assassin.SCML",
-	
 	//Customization Menu tool
 	c_item1 : "res/img/customization/item1.png",
 	c_item2 : "res/img/customization/item2.png",
@@ -161,7 +161,6 @@ var g_ressources = [
 	{type:"image", src:hero_rs.c_torso0},
 	{type:"image", src:hero_rs.c_shadow0},
 	//Assassin images
-	
 	{type:"image", src:hero_rs.c_dagger0},
 	{type:"image", src:hero_rs.c_dagger1},
 	{type:"image", src:hero_rs.c_dagger2},
@@ -173,8 +172,10 @@ var g_ressources = [
 	{type:"image", src:hero_rs.c_dagger8},
 	{type:"image", src:hero_rs.c_dagger9},
 	{type:"image", src:hero_rs.c_dagger10},
+	{type:"image", src:hero_rs.c_dagger11},
+	{type:"image", src:hero_rs.c_dagger12},
+	{type:"image", src:hero_rs.c_dagger13},
 	{type:"spriter", src:hero_rs.c_dagger_spriter},
-	
 	//Customization Menu tool
 	{type:"image", src:hero_rs.c_item1},
 	{type:"image", src:hero_rs.c_item2},

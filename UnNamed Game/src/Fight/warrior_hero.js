@@ -18,12 +18,10 @@ var WarriorHero = cc.Layer.extend({
     ctor:function(point, flipX, type){
         this._super();
 		this.type = gameHeroes[type]
-		this.spriter = new SpriterAnimation(this.type.res);
+		this.spriter = new SpriterAnimation(type, flipX);
 		//this._rect = cc.rect(0, 0, spriterTexture.width, spriterTexture.height);
 		this.spriter.setInitPosition(point)
 		this.position = point
-		//this.sprFlipX = flipX;
-		//this.sprite.runAction( cc.FlipX.create(flipX) ) 
 		this.loadHpStamina(point)
 		this.init()
 		this.addChild(this.spriter)
@@ -33,10 +31,6 @@ var WarriorHero = cc.Layer.extend({
 		this.hp = 600
 		this.spriter.setStandardAnimation(this.type.normal)
 		this.spriter.start(this.type.normal, true)
-		//this.hero.startAnimation("Stance")
-		//this.hero.startAnimation("Dash")
-		//this.hero.startAnimation("Attack")
-		//this.hero.startAnimation("Back")
 	},
 	activatePower:function(powerName, destPosition){
 		this.spriter.setEndPosition(destPosition)

@@ -30,7 +30,7 @@ var Background = cc.Layer.extend({
 		bg.setPosition(cc.p(this.position.x + this.size.width, this.position.y + this.size.height))
 		this.addChild(bg)
 		bg.runAction(cc.Sequence.create(
-			cc.MoveTo.create(60, cc.p(this.position.x - bg.getContentSize().width, this.position.y + this.size.height) ),
+			cc.MoveTo.create(70, cc.p(this.position.x - bg.getContentSize().width * 1.5, this.position.y + this.size.height) ),
 			cc.CallFunc.create(this, function(){
 				this.removeChild(bg)
 			})

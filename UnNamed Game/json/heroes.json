@@ -4,7 +4,6 @@ var gameHeroes = {}
 
 gameHeroes.dagger = {
 	powers:["slash"],
-	res: "c_dagger_spriter",
 	normal: [ ["Stance"], [0] ],
 	slash: [ ["Dash", "Attack", "Back"], [1, 2, 3] ]
 }

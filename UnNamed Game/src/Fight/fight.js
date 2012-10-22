@@ -25,8 +25,8 @@ var Fight = cc.LayerColor.extend({
 		//---------------------------
 		//Initialize BackGround
 		
-		//this.bg = new Background('desert_night',['night_cloud']);
-		this.bg = new Background('desert_day');
+		this.bg = new Background('desert_night',['night_cloud']);
+		//this.bg = new Background('desert_day');
 		this.addChild(this.bg)
 		//---------------------------
 		this.setTouchEnabled(true);
@@ -34,13 +34,13 @@ var Fight = cc.LayerColor.extend({
         this.setPosition(new cc.Point(0, -20));
 		var x = [200, 1000, 800, 400]
 		var y = [200, 200, 400, 350]
-		for(var i=0; i < 4; i++){
+		for(var i=0; i <4 ; i++){
 			var powers = {}
 			powers.p1 = i*3
 			powers.p2 = i*3+1
 			powers.p3 = i*3+2
-			if(i == 0){
-				var hero = new WarriorHero(cc.p(x[i], y[i]), i<1 ? true : false, "dagger" );
+			if(i < 4){
+				var hero = new WarriorHero(cc.p(x[i], y[i]), i<2 ? false : true , "dagger");
 				this.leftHeroes[i] = hero
 			}else{
 				var hero = new Hero(i+1+'', cc.p(x[i], y[i]), i<1 ? true : false, powers );
