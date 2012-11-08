@@ -39,11 +39,11 @@ var Fight = cc.LayerColor.extend({
 			powers.p1 = i*3
 			powers.p2 = i*3+1
 			powers.p3 = i*3+2
-			if(i < 4){
+			if(i < 1){
 				var hero = new WarriorHero(cc.p(x[i], y[i]), i<2 ? false : true , "dagger");
 				this.leftHeroes[i] = hero
 			}else{
-				var hero = new Hero(i+1+'', cc.p(x[i], y[i]), i<1 ? true : false, powers );
+				var hero = new Hero(4, cc.p(x[i], y[i]), i<3 ? true : false, powers );
 				this.rightHeroes[i] = hero
 			}
 			this.addChild( hero );
