@@ -15,8 +15,7 @@ var Customization = cc.LayerColor.extend({
         this.initWithColor(new cc.Color4B(242, 246, 248, 255), 1400, 800);
 		//var csHero = new CustomizationHero();
 		//this.addChild(csHero)
-		
-		var csHero = new SpriterAnimation();
+		var csHero = new WarriorHero(cc.p(200, 200),false, "dagger");
 		this.addChild(csHero)
 		
 		var csMenu = new CustomizationMenu(csHero);
