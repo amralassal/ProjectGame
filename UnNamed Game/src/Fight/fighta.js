@@ -10,7 +10,6 @@ var Fight = cc.LayerColor.extend({
 	
     init:function()
     {
-		Basbosa('SocketClient').socket.connect();
         var size = cc.Director.getInstance().getWinSize();
 		var w = size.width;
 		var h = size.height;
@@ -44,25 +43,46 @@ var Fight = cc.LayerColor.extend({
 				var hero = new WarriorHero(cc.p(x[i], y[i]), i<2 ? false : true , "dagger");
 				this.leftHeroes[i] = hero
 			}else{
-				var hero = new Hero(4, cc.p(x[i], y[i]),i<3 ? true : false, powers);
+				var hero = new Hero(4, cc.p(x[i], y[i]), i<3 ? true : false, powers );
 				this.rightHeroes[i] = hero
 			}
 			this.addChild( hero );
 			this.heroes.push( hero )
 			this.fightTurns.push( hero )
 		}
-        this.powerLayer = new PowerLayer();
+        //this._jetSprite.scheduleUpdate();
+        //this.schedule(this.update);
+		this.powerLayer = new PowerLayer();
 		this.addChild(this.powerLayer)
-		this.initBasbosa()
         this.whoseTurnIsIt()
+		//this.addChild(layer1);
         return true;
+		/*
+		var jetSprite = cc.Sprite.create("res/img/1.png");
+        jetSprite.setPosition(cc.p(size.width / 2, size.height / 2));
+        layer1.addChild(jetSprite);
+		//this.sprite.setScale(0.5);
+        //this.sprite.setRotation(180);
+        
+        var helloLabel = cc.LabelTTF.create("Hello world", "Arial", 30);
+        helloLabel.setPosition(new cc.Point(s.width/2,s.height/2));
+        helloLabel.setColor(new cc.Color3B(255,0,0));
+        var rotationAmount = 0;
+        var scale = 1;
+        helloLabel.schedule(function()
+            {
+                this.setRotation(rotationAmount++);
+                if(rotationAmount > 360)
+                    rotationAmount = 0;
+                this.setScale(scale);
+                scale+= 0.05;
+                if(scale > 10)
+                    scale =1;
+            });
+
+        layer1.addChild(helloLabel);
+		*/
     },
-	initBasbosa : function(){
-		var self = this
-		Basbosa('SocketClient').lon('public.fight_result', function(e, msg, next){
-			self.simulateFight(msg.hero, msg.powerName, msg.dmgHero)
-		});
-	},
 	whoseTurnIsIt : function(){
 		var hero = this.fightTurns.shift();
 		this.startFight( hero );
@@ -85,25 +105,18 @@ var Fight = cc.LayerColor.extend({
 			for(var i=0; i < this.heroes.length; i++){
 				if(pTouch[0] && this.heroes[i].containsTouchLocation(pTouch[0])){
 					console.log(this.heroes[i].imgName)
-					Basbosa('j').ltrigger('ui.public.fight', {
-						hero : 0,
-						dmgHero : 1,
-						powerName : this.powerLayer.powerSelected
-					});
-					this.simulateFight(0, this.powerLayer.powerSelected, 1)
+					this.simulateFight(this.powerLayer.powerSelected, this.heroes[i])
 				}
 			}
 		}
 		console.log('touch')
     },
 	
-	simulateFight: function(heroNum, powerName, dmgHeroNum){
+	simulateFight: function(powerName, dmgHero){
 		var damage = 100 //eval('HeroPower.p1').attack
 		//this.hero.attack();
 		//this.simulateAttack(powerNum, dmgHero)
-		var hero = this.heroes[heroNum]
-		var dmgHero = this.heroes[dmgHeroNum]
-		hero.activatePower(powerName, dmgHero.sprite.getPosition())
+		this.hero.activatePower(powerName, dmgHero.sprite.getPosition())
 		dmgHero.attackedBy(damage)
 		this.whoseTurnIsIt()
 	},
